@@ -31,7 +31,7 @@ use self::{
 };
 use crate::{
     approvals::ExecutorApprovalService,
-    command::{CmdOverrides, CommandBuilder, apply_overrides},
+    command::{CmdOverrides, CommandBuilder, apply_overrides, apply_environment_variables},
     executors::{
         AppendPrompt, ExecutorError, SpawnedChild, StandardCodingAgentExecutor,
         codex::{jsonrpc::ExitSignalSender, normalize_logs::Error},
@@ -265,6 +265,9 @@ impl Codex {
             .env("NODE_NO_WARNINGS", "1")
             .env("NO_COLOR", "1")
             .env("RUST_LOG", "error");
+
+        // Apply environment variables from configuration
+        apply_environment_variables(&mut process, &self.cmd);
 
         let mut child = process.group_spawn()?;
 

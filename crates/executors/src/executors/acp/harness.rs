@@ -17,7 +17,10 @@ use tracing::error;
 use workspace_utils::{shell::get_shell_command, stream_lines::LinesStreamExt};
 
 use super::{AcpClient, SessionManager};
-use crate::executors::{ExecutorError, SpawnedChild, acp::AcpEvent};
+use crate::{
+    command::{CmdOverrides, apply_environment_variables},
+    executors::{ExecutorError, SpawnedChild, acp::AcpEvent},
+};
 
 /// Reusable harness for ACP-based conns (Gemini, Qwen, etc.)
 pub struct AcpAgentHarness {
@@ -51,6 +54,7 @@ impl AcpAgentHarness {
         current_dir: &Path,
         prompt: String,
         full_command: String,
+        cmd_overrides: &CmdOverrides,
     ) -> Result<SpawnedChild, ExecutorError> {
         let (shell_cmd, shell_arg) = get_shell_command();
         let mut command = Command::new(shell_cmd);
@@ -63,6 +67,9 @@ impl AcpAgentHarness {
             .arg(shell_arg)
             .arg(full_command)
             .env("NODE_NO_WARNINGS", "1");
+
+        // Apply environment variables from configuration
+        apply_environment_variables(&mut command, cmd_overrides);
 
         let mut child = command.group_spawn()?;
 
@@ -89,6 +96,7 @@ impl AcpAgentHarness {
         prompt: String,
         session_id: &str,
         full_command: String,
+        cmd_overrides: &CmdOverrides,
     ) -> Result<SpawnedChild, ExecutorError> {
         let (shell_cmd, shell_arg) = get_shell_command();
         let mut command = Command::new(shell_cmd);
@@ -101,6 +109,9 @@ impl AcpAgentHarness {
             .arg(shell_arg)
             .arg(full_command)
             .env("NODE_NO_WARNINGS", "1");
+
+        // Apply environment variables from configuration
+        apply_environment_variables(&mut command, cmd_overrides);
 
         let mut child = command.group_spawn()?;
 
