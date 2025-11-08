@@ -4,6 +4,8 @@ import {
   SelectWidget,
   CheckboxWidget,
   TextareaWidget,
+  EnvironmentVariablesWidget,
+  EnvironmentVariablesField,
 } from './widgets';
 import {
   ArrayFieldTemplate,
@@ -18,6 +20,11 @@ export const customWidgets: RegistryWidgetsType = {
   CheckboxWidget,
   TextareaWidget,
   textarea: TextareaWidget,
+  EnvironmentVariablesWidget,
+};
+
+export const customFields = {
+  EnvironmentVariablesField,
 };
 
 export const customTemplates = {
@@ -29,5 +36,6 @@ export const customTemplates = {
 
 export const shadcnTheme = {
   widgets: customWidgets,
+  fields: customFields,
   templates: customTemplates,
 };

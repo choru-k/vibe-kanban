@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
@@ -16,6 +17,12 @@ pub struct CmdOverrides {
     )]
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub additional_params: Option<Vec<String>>,
+    #[schemars(
+        title = "Environment Variables",
+        description = "Environment variables to set for the agent process"
+    )]
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub environment_variables: HashMap<String, String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, TS, JsonSchema)]
@@ -75,6 +82,16 @@ impl CommandBuilder {
         }
         parts.extend(additional_args.iter().cloned());
         parts.join(" ")
+    }
+}
+
+/// Apply environment variables from CmdOverrides to a tokio process Command
+pub fn apply_environment_variables(
+    command: &mut tokio::process::Command,
+    overrides: &CmdOverrides,
+) {
+    for (key, value) in &overrides.environment_variables {
+        command.env(key, value);
     }
 }
 

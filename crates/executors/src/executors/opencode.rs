@@ -19,7 +19,7 @@ use ts_rs::TS;
 use workspace_utils::{msg_store::MsgStore, path::make_path_relative, shell::get_shell_command};
 
 use crate::{
-    command::{CmdOverrides, CommandBuilder, apply_overrides},
+    command::{CmdOverrides, CommandBuilder, apply_overrides, apply_environment_variables},
     executors::{
         AppendPrompt, ExecutorError, SpawnedChild, StandardCodingAgentExecutor,
         opencode::share_bridge::Bridge as ShareBridge,
@@ -149,6 +149,9 @@ impl StandardCodingAgentExecutor for Opencode {
             .env("OPENCODE_AUTO_SHARE", "1")
             .env("OPENCODE_API", bridge.base_url.clone());
 
+        // Apply environment variables from configuration
+        apply_environment_variables(&mut command, &self.cmd);
+
         let mut child = match command.group_spawn() {
             Ok(c) => c,
             Err(e) => {
@@ -215,6 +218,9 @@ impl StandardCodingAgentExecutor for Opencode {
             .env("NODE_NO_WARNINGS", "1")
             .env("OPENCODE_AUTO_SHARE", "1")
             .env("OPENCODE_API", bridge.base_url.clone());
+
+        // Apply environment variables from configuration
+        apply_environment_variables(&mut command, &self.cmd);
 
         let mut child = match command.group_spawn() {
             Ok(c) => c,

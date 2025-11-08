@@ -132,6 +132,14 @@
       "items": {
         "type": "string"
       }
+    },
+    "environment_variables": {
+      "title": "Environment Variables",
+      "description": "Environment variables to set for the agent process",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   },
   "type": "object"

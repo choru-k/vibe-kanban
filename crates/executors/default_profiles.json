@@ -3,24 +3,28 @@
     "CLAUDE_CODE": {
       "DEFAULT": {
         "CLAUDE_CODE": {
-          "dangerously_skip_permissions": true
+          "dangerously_skip_permissions": true,
+          "environment_variables": {}
         }
       },
       "PLAN": {
         "CLAUDE_CODE": {
-          "plan": true
+          "plan": true,
+          "environment_variables": {}
         }
       },
       "APPROVALS": {
         "CLAUDE_CODE": {
-          "approvals": true
+          "approvals": true,
+          "environment_variables": {}
         }
       }
     },
     "AMP": {
       "DEFAULT": {
         "AMP": {
-          "dangerously_allow_all": true
+          "dangerously_allow_all": true,
+          "environment_variables": {}
         }
       }
     },
@@ -28,44 +32,52 @@
       "DEFAULT": {
         "GEMINI": {
           "model": "default",
-          "yolo": true
+          "yolo": true,
+          "environment_variables": {}
         }
       },
       "FLASH": {
         "GEMINI": {
           "model": "flash",
-          "yolo": true
+          "yolo": true,
+          "environment_variables": {}
         }
       }
     },
     "CODEX": {
       "DEFAULT": {
         "CODEX": {
-          "sandbox": "danger-full-access"
+          "sandbox": "danger-full-access",
+          "environment_variables": {}
         }
       },
       "HIGH": {
         "CODEX": {
           "sandbox": "danger-full-access",
-          "model_reasoning_effort": "high"
+          "model_reasoning_effort": "high",
+          "environment_variables": {}
         }
       },
       "APPROVALS": {
         "CODEX": {
           "sandbox": "workspace-write",
-          "ask_for_approval": "unless-trusted"
+          "ask_for_approval": "unless-trusted",
+          "environment_variables": {}
         }
       }
     },
     "OPENCODE": {
       "DEFAULT": {
-        "OPENCODE": {}
+        "OPENCODE": {
+          "environment_variables": {}
+        }
       }
     },
     "QWEN_CODE": {
       "DEFAULT": {
         "QWEN_CODE": {
-          "yolo": true
+          "yolo": true,
+          "environment_variables": {}
         }
       }
     },
@@ -73,62 +85,72 @@
       "DEFAULT": {
         "CURSOR_AGENT": {
           "force": true,
-          "model": "auto"
+          "model": "auto",
+          "environment_variables": {}
         }
       },
       "SONNET_4_5": {
         "CURSOR_AGENT": {
           "force": true,
-          "model": "sonnet-4.5"
+          "model": "sonnet-4.5",
+          "environment_variables": {}
         }
       },
       "SONNET_4_5_THINKING": {
         "CURSOR_AGENT": {
           "force": true,
-          "model": "sonnet-4.5-thinking"
+          "model": "sonnet-4.5-thinking",
+          "environment_variables": {}
         }
       },
       "OPUS_4_1": {
         "CURSOR_AGENT": {
           "force": true,
-          "model": "opus-4.1"
+          "model": "opus-4.1",
+          "environment_variables": {}
         }
       },
       "GPT_5": {
         "CURSOR_AGENT": {
           "force": true,
-          "model": "gpt-5"
+          "model": "gpt-5",
+          "environment_variables": {}
         }
       },
       "GROK": {
         "CURSOR_AGENT": {
           "force": true,
-          "model": "grok"
+          "model": "grok",
+          "environment_variables": {}
         }
       }
     },
     "COPILOT": {
       "DEFAULT": {
         "COPILOT": {
-          "allow_all_tools": true
+          "allow_all_tools": true,
+          "environment_variables": {}
         }
       },
       "GPT_5": {
         "COPILOT": {
           "allow_all_tools": true,
-          "model": "gpt-5"
+          "model": "gpt-5",
+          "environment_variables": {}
         }
       },
       "CLAUDE_SONNET_4_5": {
         "COPILOT": {
           "allow_all_tools": true,
-          "model": "claude-sonnet-4.5"
+          "model": "claude-sonnet-4.5",
+          "environment_variables": {}
         }
       },
       "CLAUDE_SONNET_4": {
         "COPILOT": {
           "allow_all_tools": true,
-          "model": "claude-sonnet-4"
+          "model": "claude-sonnet-4",
+          "environment_variables": {}
         }
       }
     }

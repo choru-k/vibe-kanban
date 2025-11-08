@@ -52,6 +52,14 @@ export function ExecutorConfigForm({
     return schemas[executor];
   }, [executor]);
 
+  const uiSchema = useMemo(() => {
+    return {
+      environment_variables: {
+        'ui:field': 'EnvironmentVariablesField',
+      },
+    };
+  }, []);
+
   useEffect(() => {
     setFormData(value || {});
     setValidationErrors([]);
@@ -93,6 +101,7 @@ export function ExecutorConfigForm({
         <CardContent className="p-0">
           <Form
             schema={schema}
+            uiSchema={uiSchema}
             formData={formData}
             onChange={handleChange}
             onSubmit={handleSubmit}
@@ -102,6 +111,7 @@ export function ExecutorConfigForm({
             liveValidate
             showErrorList={false}
             widgets={shadcnTheme.widgets}
+            fields={shadcnTheme.fields}
             templates={shadcnTheme.templates}
           >
             {onSave && (

@@ -24,7 +24,7 @@ use workspace_utils::{
 use self::{client::ClaudeAgentClient, protocol::ProtocolPeer, types::PermissionMode};
 use crate::{
     approvals::ExecutorApprovalService,
-    command::{CmdOverrides, CommandBuilder, apply_overrides},
+    command::{CmdOverrides, CommandBuilder, apply_overrides, apply_environment_variables},
     executors::{
         AppendPrompt, ExecutorError, SpawnedChild, StandardCodingAgentExecutor,
         codex::client::LogWriter,
@@ -215,6 +215,9 @@ impl ClaudeCode {
             .current_dir(current_dir)
             .arg(shell_arg)
             .arg(&base_command);
+
+        // Apply environment variables from configuration
+        apply_environment_variables(&mut command, &self.cmd);
 
         let mut child = command.group_spawn()?;
         let child_stdout = child.inner().stdout.take().ok_or_else(|| {
